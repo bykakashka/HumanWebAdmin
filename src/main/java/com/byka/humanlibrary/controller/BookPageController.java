@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin/book")
-public class BookPageController extends AbstractAdminController {
+public class BookPageController {
     @Autowired
     private BookService bookService;
 
@@ -17,7 +17,7 @@ public class BookPageController extends AbstractAdminController {
     public String getBooks(final Model model) {
         model.addAttribute("books", bookService.getAll());
         model.addAttribute("newBook", new BookData());
-        return super.setContentIntoPage(model, "books");
+        return "books";
     }
 
     @GetMapping("/{id}")

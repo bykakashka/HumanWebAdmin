@@ -1,6 +1,7 @@
 package com.byka.humanlibrary;
 
 import com.byka.humanlibrary.constants.UserRoleEnum;
+import com.byka.humanlibrary.intercaptor.PostHandleInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,11 +50,17 @@ public class AppConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
+        registry.addInterceptor(postHandleInterceptor());
     }
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public PostHandleInterceptor postHandleInterceptor() {
+        return new PostHandleInterceptor();
     }
 
     @Bean
