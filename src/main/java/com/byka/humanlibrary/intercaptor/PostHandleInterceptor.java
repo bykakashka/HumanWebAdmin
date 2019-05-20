@@ -19,8 +19,5 @@ public class PostHandleInterceptor extends HandlerInterceptorAdapter {
                 modelAndView.setViewName("pageTemplate");
             }
         }
-
     }
-
-
 }

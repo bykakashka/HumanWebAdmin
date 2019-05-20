@@ -3,11 +3,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <title>${title}</title>
-<script defer src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
-<script defer src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
-      rel="stylesheet">
 
-<%--TODO customize this--%>
+<script defer src="/webjars/humanlib/0.0.1-SNAPSHOT/app-bundle.js"></script>
+<link rel="stylesheet" href="/css/app.css"  type="text/css"/>
 <jsp:include page="menu.jsp"/>
 <jsp:include page="${page}.jsp"/>
+</html>

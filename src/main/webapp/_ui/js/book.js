@@ -1,3 +1,5 @@
+const $ = require("jquery");
+
 function showModal() {
     const modal = $('#newBook');
 
@@ -22,3 +24,20 @@ function showEdit (id) {
         modal.modal('show');
     });
 }
+
+function initBooks() {
+    $('#newBookButton').click(function(){
+        showModal();
+    });
+
+    $('#saveBook').click(function () {
+        $('#bookForm').submit();
+    });
+
+    $('.js-editBook').click(function () {
+        const bookId = $(this).attr('data-bookid');
+        showEdit(bookId);
+    });
+}
+
+exports.init = initBooks;

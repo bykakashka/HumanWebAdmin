@@ -3,10 +3,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<script defer src="/js/book.js"></script>
 
+<html data-appid="book">
 <div class="container">
-    <button type="button" class="btn btn-primary" onclick="showModal();">
+    <button type="button" class="btn btn-primary" id="newBookButton">
         <spring:message code="book.newBook"/>
     </button>
     <br/>
@@ -15,7 +15,7 @@
         <p>
             <b>${book.name} </b>
             <a href="#">
-                <i class="ui-icon-pencil" id="editBook" onclick="showEdit(${book.id});">*</i>
+                <i class="ui-icon-pencil js-editBook" id="editBook" data-bookid="${book.id}">*</i>
             </a>
             <br/>
                 ${book.longDescription}
@@ -33,7 +33,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form:form action="/admin/book/create" method="post" id="newBookForm" modelAttribute="newBook">
+                <form:form action="/admin/book/create" method="post" id="bookForm" modelAttribute="newBook">
                     <form:hidden path="id" id="id"/>
 
                     <label for="name"><spring:message code="book.name"/></label>
@@ -47,10 +47,14 @@
                 </form:form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="$('#newBookForm').submit();"><spring:message code="common.save"/>
+                <button type="button" class="btn btn-primary" id="saveBook"><spring:message
+                        code="common.save"/>
                 </button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><spring:message code="common.cancel"/></button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><spring:message
+                        code="common.cancel"/></button>
             </div>
         </div>
     </div>
 </div>
+
+</html>
