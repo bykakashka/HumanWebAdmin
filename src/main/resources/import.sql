@@ -101,11 +101,11 @@ insert into event_book(book_id, event_id) values (10, 1);
 insert into event_book(book_id, event_id) values (11, 1);
 insert into event_book(book_id, event_id) values (12, 1);
 
-insert into session(id, sequence, event_id, start_date, end_date) values (1, 1, 1, '02-11-2020 14:45:00', '02-11-2020 15:05:00');
-insert into session(id, sequence, event_id, start_date, end_date) values (2, 2, 1, '02-11-2020 15:15:00', '02-11-2020 15:35:00');
-insert into session(id, sequence, event_id, start_date, end_date) values (3, 3, 1, '02-11-2020 15:15:00', '02-11-2020 16:05:00');
-insert into session(id, sequence, event_id, start_date, end_date) values (4, 4, 1, '02-11-2020 16:15:00', '02-11-2020 16:35:00');
-insert into session(id, sequence, event_id, start_date, end_date) values (5, 5, 1, '02-11-2020 17:00:00', '02-11-2020 17:25:00');
+insert into session(sequence, event_id, start_date, end_date) values (1, 1, '02-11-2020 14:45:00', '02-11-2020 15:05:00');
+insert into session(sequence, event_id, start_date, end_date) values (2, 1, '02-11-2020 15:15:00', '02-11-2020 15:35:00');
+insert into session(sequence, event_id, start_date, end_date) values (3, 1, '02-11-2020 15:45:00', '02-11-2020 16:05:00');
+insert into session(sequence, event_id, start_date, end_date) values (4, 1, '02-11-2020 16:15:00', '02-11-2020 16:35:00');
+insert into session(sequence, event_id, start_date, end_date) values (5, 1, '02-11-2020 17:00:00', '02-11-2020 17:25:00');
 
 -- TODO deprecated>
 insert into book_session (book_id, session_id) values (1, 1);

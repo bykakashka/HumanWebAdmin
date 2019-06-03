@@ -7,7 +7,8 @@ const appLoader = require("./appLoader");
 const apps = {
     menu: require("./js/menu"),
     book: require("./js/book"),
-    event: require("./js/event")
+    event: require("./js/event"),
+    session: require("./js/session")
 };
 
 $(document).ready(function() {

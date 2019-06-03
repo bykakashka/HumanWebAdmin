@@ -58,7 +58,7 @@
                     </div>
 
                     <label for="city"><spring:message code="event.city"/></label>
-                    <form:select path="cityId" class="form-control" id="city">
+                    <form:select path="cityId" class="form-control" id="city" required="required">
                         <form:options items="${cities}" itemValue="id" itemLabel="nameEn"/>
                     </form:select>
 

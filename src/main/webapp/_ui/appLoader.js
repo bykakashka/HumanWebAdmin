@@ -10,7 +10,7 @@ function loadApp(apps, appId) {
     ) {
         try {
             apps[appId].init();
-            console.log('init' + appId);
+            console.log('init ' + appId);
         } catch (e) {
             console.error("error while initialising app", appId, e);
         }
