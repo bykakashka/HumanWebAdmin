@@ -1,6 +1,6 @@
-insert into City (id, name_en) values (1, 'minsk');
+insert into City (name_en) values ('minsk');
 
-insert into Event (id, date, city_id, address, title, status, info) values (1, '02-11-2020', 1, 'test address', 'title', 'PUBLISHED', 'Мерапрыемства адбудзецца ў прасторы Lo-Fi Customs (вул. Кастрычніцкая 16/3, ул. Октябрьская 16/3). Гэта доўгі будынак уздоўж Свіслачы, у якім мы будзем у самым канцы - апошнія дзверы, 2 паверх. Будуць указальнікі на ўік-энд "Розныя-Роўныя" - трэба арыентавацца па ім. Мапа ад метро ў дадатку.
+insert into Event (date, city_id, address, title, status, info) values ('02-11-2020', 1, 'test address', 'title', 'PUBLISHED', 'Мерапрыемства адбудзецца ў прасторы Lo-Fi Customs (вул. Кастрычніцкая 16/3, ул. Октябрьская 16/3). Гэта доўгі будынак уздоўж Свіслачы, у якім мы будзем у самым канцы - апошнія дзверы, 2 паверх. Будуць указальнікі на ўік-энд "Розныя-Роўныя" - трэба арыентавацца па ім. Мапа ад метро ў дадатку.
 
 
 Жывая Бібліятэка будзе з 14:45 да 19:00, але запрашаем вас раней на лекцыю і адкрыццё ўік-энду "Розныя роўныя" у 13:00, а пасля Жывой Бібліятэка на канцэрт у 20:00.
@@ -10,8 +10,8 @@ insert into Event (id, date, city_id, address, title, status, info) values (1, '
 
 
 П.с. Яшчэ раім вам узяць з сабой, калі ў вас ёсць, свой тэрма-кубак - так вы заўжды будзеце са сваёй кавай/гарбатай. Давайце будзем больш экапрыязнымі разам! :)');
-insert into Event (id, date, city_id, address, title, status) values (2, '02-11-2021', 1, 'test address', 'title', 'NEW');
-insert into Event (id, date, city_id, address, title, status) values (3, '02-11-2018', 1, 'test address', 'title', 'NEW');
+insert into Event (date, city_id, address, title, status) values ('02-11-2021', 1, 'test address', 'title', 'NEW');
+insert into Event (date, city_id, address, title, status) values ('02-11-2018', 1, 'test address', 'title', 'NEW');
 
 insert into users(nickname, pass) values ('byka', '$2a$10$d/JqO06hWkCDYzHmvmfN/uw3ia5yd9tXWtI4lRjCez1KRmVPGpr4G');
 insert into users(nickname, pass) values ('test1', '$2a$10$d/JqO06hWkCDYzHmvmfN/uw3ia5yd9tXWtI4lRjCez1KRmVPGpr4G');
@@ -107,59 +107,51 @@ insert into session(sequence, event_id, start_date, end_date) values (3, 1, '02-
 insert into session(sequence, event_id, start_date, end_date) values (4, 1, '02-11-2020 16:15:00', '02-11-2020 16:35:00');
 insert into session(sequence, event_id, start_date, end_date) values (5, 1, '02-11-2020 17:00:00', '02-11-2020 17:25:00');
 
--- TODO deprecated>
-insert into book_session (book_id, session_id) values (1, 1);
-insert into book_session (book_id, session_id) values (2, 1);
-insert into book_session (book_id, session_id) values (3, 1);
-insert into book_session (book_id, session_id) values (4, 1);
-insert into book_session (book_id, session_id) values (5, 1);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (1, 10, 1, 1);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (2, 10, 2, 1);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (3, 10, 3, 1);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (4, 10, 4, 1);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (5, 10, 5, 1);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (6, 10, 6, 1);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (7, 10, 7, 1);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (8, 10, 8, 1);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (9, 10, 9, 1);
 
+insert into book_to_session(board_no, max_users, book_id, session_id) values (1, 10, 5, 2);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (2, 10, 7, 2);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (3, 10, 2, 2);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (4, 10, 1, 2);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (5, 10, 10, 2);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (6, 10, 11, 2);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (7, 10, 12, 2);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (8, 10, 9, 2);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (9, 10, 4, 2);
 
-insert into board(board_no, max_users, book_id, session_id) values (1, 10, 1, 1);
-insert into board(board_no, max_users, book_id, session_id) values (2, 10, 2, 1);
-insert into board(board_no, max_users, book_id, session_id) values (3, 10, 3, 1);
-insert into board(board_no, max_users, book_id, session_id) values (4, 10, 4, 1);
-insert into board(board_no, max_users, book_id, session_id) values (5, 10, 5, 1);
-insert into board(board_no, max_users, book_id, session_id) values (6, 10, 6, 1);
-insert into board(board_no, max_users, book_id, session_id) values (7, 10, 7, 1);
-insert into board(board_no, max_users, book_id, session_id) values (8, 10, 8, 1);
-insert into board(board_no, max_users, book_id, session_id) values (9, 10, 9, 1);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (1, 10, 1, 3);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (2, 10, 2, 3);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (3, 10, 3, 3);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (4, 10, 6, 3);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (5, 10, 8, 3);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (6, 10, 9, 3);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (7, 10, 4, 3);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (8, 10, 7, 3);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (9, 10, 10, 3);
 
-insert into board(board_no, max_users, book_id, session_id) values (1, 10, 5, 2);
-insert into board(board_no, max_users, book_id, session_id) values (2, 10, 7, 2);
-insert into board(board_no, max_users, book_id, session_id) values (3, 10, 2, 2);
-insert into board(board_no, max_users, book_id, session_id) values (4, 10, 1, 2);
-insert into board(board_no, max_users, book_id, session_id) values (5, 10, 10, 2);
-insert into board(board_no, max_users, book_id, session_id) values (6, 10, 11, 2);
-insert into board(board_no, max_users, book_id, session_id) values (7, 10, 12, 2);
-insert into board(board_no, max_users, book_id, session_id) values (8, 10, 9, 2);
-insert into board(board_no, max_users, book_id, session_id) values (9, 10, 4, 2);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (1, 10, 3, 4);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (2, 10, 4, 4);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (3, 10, 6, 4);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (4, 10, 8, 4);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (5, 10, 12, 4);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (6, 10, 10, 4);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (7, 10, 11, 4);
 
-insert into board(board_no, max_users, book_id, session_id) values (1, 10, 1, 3);
-insert into board(board_no, max_users, book_id, session_id) values (2, 10, 2, 3);
-insert into board(board_no, max_users, book_id, session_id) values (3, 10, 3, 3);
-insert into board(board_no, max_users, book_id, session_id) values (4, 10, 6, 3);
-insert into board(board_no, max_users, book_id, session_id) values (5, 10, 8, 3);
-insert into board(board_no, max_users, book_id, session_id) values (6, 10, 9, 3);
-insert into board(board_no, max_users, book_id, session_id) values (7, 10, 4, 3);
-insert into board(board_no, max_users, book_id, session_id) values (8, 10, 7, 3);
-insert into board(board_no, max_users, book_id, session_id) values (9, 10, 10, 3);
-
-insert into board(board_no, max_users, book_id, session_id) values (1, 10, 3, 4);
-insert into board(board_no, max_users, book_id, session_id) values (2, 10, 4, 4);
-insert into board(board_no, max_users, book_id, session_id) values (3, 10, 6, 4);
-insert into board(board_no, max_users, book_id, session_id) values (4, 10, 8, 4);
-insert into board(board_no, max_users, book_id, session_id) values (5, 10, 12, 4);
-insert into board(board_no, max_users, book_id, session_id) values (6, 10, 10, 4);
-insert into board(board_no, max_users, book_id, session_id) values (7, 10, 11, 4);
-
-insert into board(board_no, max_users, book_id, session_id) values (1, 10, 8, 5);
-insert into board(board_no, max_users, book_id, session_id) values (2, 10, 7, 5);
-insert into board(board_no, max_users, book_id, session_id) values (3, 10, 6, 5);
-insert into board(board_no, max_users, book_id, session_id) values (4, 10, 4, 5);
-insert into board(board_no, max_users, book_id, session_id) values (5, 10, 5, 5);
-insert into board(board_no, max_users, book_id, session_id) values (6, 10, 2, 5);
-insert into board(board_no, max_users, book_id, session_id) values (7, 10, 10, 5);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (1, 10, 8, 5);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (2, 10, 7, 5);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (3, 10, 6, 5);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (4, 10, 4, 5);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (5, 10, 5, 5);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (6, 10, 2, 5);
+insert into book_to_session(board_no, max_users, book_id, session_id) values (7, 10, 10, 5);
 
 
 insert into Media(id, url, name) values (1, 'https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260', 'test image');

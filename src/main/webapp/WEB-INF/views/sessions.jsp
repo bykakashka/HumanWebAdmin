@@ -7,106 +7,82 @@
 <div class="container">
     <input type="hidden" value="${event.id}" id="eventId">
     <div>
-        ${event.title}
+        <h3><spring:message code="session.event.title"/> &nbsp; ${event.title} </h3>
     </div>
 
+    <p>
     <div>
         <button id="addSession" class="btn btn-primary">
             <spring:message code="event.addSession"/>
         </button>
     </div>
-
+    </p>
+    <p>
     <div>
-        <table border="1">
-            <thead>
-            <td>
-            </td>
-            <c:forEach var="h" items="${map.header}">
-                <td>
-                        ${h.sequence}<br/>
-                        ${h.startDate} - ${h.endDate}
-                </td>
-            </c:forEach>
-            <td></td>
-            </thead>
-            <tbody>
-
-            <c:forEach var="bookRow" items="${map.row}">
-                <tr>
+        <c:if test="${not empty map.header or not empty map.row}">
+            <table class="table table-striped table-bordered">
+                <c:if test="${not empty map.header}">
+                    <thead>
                     <td>
-                            ${bookRow.bookInfo.name} (${bookRow.bookInfo.id})
                     </td>
-                    <c:forEach var="cell" items="${bookRow.rows}">
-                        <td width="50px">
-                                ${cell.boardNo}
-                            <br/>
-                                ${cell.maxUsers}
+                    <c:forEach var="h" items="${map.header}">
+                        <td>
+                                ${h.sequence}<br/>
+                                ${h.startDate} - ${h.endDate}
                         </td>
                     </c:forEach>
-                    <td>
-                        <button class="btn btn-primary js-modifyBookBoardButton" data-bookid="${bookRow.bookInfo.id}">
-                            <spring:message code="event.modifyBook"/>
-                        </button>
-                    </td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </div>
+                    <td></td>
+                    </thead>
+                </c:if>
+                <tbody>
+                <c:forEach var="bookRow" items="${map.row}">
+                    <tr>
+                        <td>
+                                ${bookRow.bookInfo.name}
+                        </td>
+                        <c:forEach var="cell" items="${bookRow.rows}">
+                            <td width="50px">
+                                <c:if test="${not empty cell.boardNo}">
+                                    № ${cell.boardNo}
+                                </c:if>
+                                <br/>
+                                <c:if test="${not empty cell.maxUsers}">
+                                    ${cell.registeredCount} &nbsp; (${cell.maxUsers})
+                                </c:if>
+                            </td>
+                        </c:forEach>
+                        <td>
+                            <button class="btn btn-primary js-modifyBookBoardButton"
+                                    data-bookid="${bookRow.bookInfo.id}"
+                                    data-bookName="${bookRow.bookInfo.name}">
+                                <spring:message code="event.modifyBook"/>
+                            </button>
+                            &nbsp;
+                            <form action="/admin/sessions/removeBook/${event.id}" method="post">
+                                <input type="hidden" value="${bookRow.bookInfo.id}" name="bookId">
 
-    <button id="addBookSessionButton" class="btn btn-primary">
-        <spring:message code="session.addBook"/>
-    </button>
+                                <button type="submit" class="btn btn-danger btn-sm  right-button">
+                                    <span class="glyphicon glyphicon-minus"></span> <spring:message code="event.removeBook"/>
+                                </button>
+                            </form>
+
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </c:if>
+    </div>
+    </p>
+    <p>
+        <button id="addBookSessionButton" class="btn btn-primary">
+            <spring:message code="session.addBook"/>
+        </button>
+    </p>
 </div>
 
 <div class="modal" id="modifyBookBoardsModal" tabindex="-1" role="dialog">
-    <input type="hidden" id="modalBookId">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><spring:message code="event.modifyBook"/></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
 
-            <div class="modal-body">
-                <table border="1">
-                    <thead>
-                        <th><spring:message code="event.time"/></th>
-                        <th><spring:message code="event.boardNo"/></th>
-                        <th><spring:message code="event.maxUsers"/></th>
-                    </thead>
-                    <tbody>
-                    <form:form modelAttribute="modifyBookForm" action="/admin/sessions/modifyBook/${event.id}/" id="bookBoardForm">
-                        <c:forEach var="h" items="${map.header}">
-                            <c:set var="sequence" value="${h.sequence}"/>
-                            <tr>
-                                <td>${h.startDate} - ${h.endDate}</td>
-                                <td>
-                                    <form:input path='data[${sequence}].boardNo' id="boardNo-${h.sequence}"/>
-                                </td>
-                                <td>
-                                    <form:input path="data[${sequence}].maxUsers" id="maxusers-${h.sequence}"/>
-                                </td>
-                                <input type="hidden" value="${h.sequence}" name="data[${sequence}].sequence"/>${h.sessionId}
-                                <input type="hidden" value="${h.sessionId}" name="data[${sequence}].sessionId"/>
-                            </tr>
-                        </c:forEach>
-                    </form:form>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="saveBookBoard"><spring:message
-                        code="common.save"/>
-                </button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><spring:message
-                        code="common.cancel"/></button>
-            </div>
-        </div>
-    </div>
 </div>
 
 

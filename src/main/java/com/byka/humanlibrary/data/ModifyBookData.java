@@ -3,8 +3,9 @@ package com.byka.humanlibrary.data;
 public class ModifyBookData {
     private Integer maxUsers;
     private Integer boardNo;
-    private Long sequence;
+    private Integer sequence;
     private Long sessionId;
+    private String time;
 
     public Long getSessionId() {
         return sessionId;
@@ -14,11 +15,11 @@ public class ModifyBookData {
         this.sessionId = sessionId;
     }
 
-    public Long getSequence() {
+    public Integer getSequence() {
         return sequence;
     }
 
-    public void setSequence(Long sequence) {
+    public void setSequence(Integer sequence) {
         this.sequence = sequence;
     }
 
@@ -36,5 +37,13 @@ public class ModifyBookData {
 
     public void setBoardNo(Integer boardNo) {
         this.boardNo = boardNo;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

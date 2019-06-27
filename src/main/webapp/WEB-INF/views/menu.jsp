@@ -5,7 +5,6 @@
 <div id="mySidenav" class="sidenav">
     <a href="/admin/book" class="test"><spring:message code="menu.books"/></a>
     <a href="/admin/event"><spring:message code="menu.events"/></a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
+    <a href="/admin/users"><spring:message code="menu.users"/></a>
 </div>
 <span id="openMenu"><spring:message code="menu"/></span>

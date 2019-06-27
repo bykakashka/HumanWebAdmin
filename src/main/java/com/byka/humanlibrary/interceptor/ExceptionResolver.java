@@ -1,4 +1,4 @@
-package com.byka.humanlibrary.intercaptor;
+package com.byka.humanlibrary.interceptor;
 
 import com.byka.humanlibrary.controller.EventPageController;
 import org.slf4j.Logger;

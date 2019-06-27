@@ -1,4 +1,4 @@
-package com.byka.humanlibrary.intercaptor;
+package com.byka.humanlibrary.interceptor;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -13,7 +13,7 @@ public class PostHandleInterceptor extends HandlerInterceptorAdapter {
                            ModelAndView modelAndView) throws Exception {
         if (modelAndView != null) {
             String viewName = modelAndView.getViewName();
-            if (viewName != null && !viewName.startsWith("redirect:")) {
+            if (viewName != null && !viewName.startsWith("redirect:") && !viewName.startsWith("fragments")) {
                 modelAndView.addObject("page", viewName);
                 modelAndView.addObject("title", "Живая библиотека");
                 modelAndView.setViewName("pageTemplate");

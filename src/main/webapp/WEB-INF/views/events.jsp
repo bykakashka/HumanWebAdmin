@@ -5,10 +5,11 @@
 
 <html data-appid="event">
 <div class="container">
+    <p>
     <button type="button" class="btn btn-primary" id="newEventButton">
         <spring:message code="event.newEvent"/>
     </button>
-    <br/>
+    </p>
 
     <c:forEach var="event" items="${events}">
         <p>
@@ -20,6 +21,11 @@
                 ${event.city} - ${event.address} - ${event.date}
             <br/>
                 ${event.info}
+        <p>
+            <a href="/admin/sessions/${event.id}">
+                <button type="button" class="btn btn-primary"><spring:message code="event.showSessions"/></button>
+            </a>
+        </p>
         </p>
     </c:forEach>
 </div>
@@ -64,16 +70,16 @@
 
                     <label for="status"><spring:message code="event.status"/></label>
                     <form:select path="status" class="form-control" id="status">
-                        <spring:message code="event.status.new" var="newStatus" />
+                        <spring:message code="event.status.new" var="newStatus"/>
                         <form:option label="${newStatus}" value="NEW"/>
 
-                        <spring:message code="event.status.regStarted" var="regStarted" />
+                        <spring:message code="event.status.regStarted" var="regStarted"/>
                         <form:option label="${regStarted}" value="REG_STARTED"/>
 
-                        <spring:message code="event.status.running" var="running" />
+                        <spring:message code="event.status.running" var="running"/>
                         <form:option label="${running}" value="RUNNING"/>
 
-                        <spring:message code="event.status.closed" var="closed" />
+                        <spring:message code="event.status.closed" var="closed"/>
                         <form:option label="${closed}" value="CLOESD"/>
                     </form:select>
                 </form:form>

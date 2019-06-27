@@ -1,6 +1,25 @@
 const $ = require("jquery");
 
+function modifyBook() {
+    $('.js-modifyBookBoardButton').click(function () {
+        const bookId = $(this).attr('data-bookid');
+        $('#modalBookId').val(bookId);
+
+        // document.getElementById("modalTile").innerHTML = '&nbsp;' + $(this).attr('data-bookName');
+
+        const eventId = $('#eventId').val();
+        $.ajax({
+            url: "/admin/ajax/board/" + eventId + "/" + bookId
+        }).done(function (result) {
+            $('#modifyBookBoardsModal').replaceWith(result);
+            $('#modifyBookBoardsModal').modal('show');
+        });
+    });
+}
+
 function initSessions() {
+    // cleanModalOnHide();
+
     $("#addSession").click(function () {
         $("#newSession").modal('show');
     });
@@ -19,40 +38,25 @@ function initSessions() {
         $("#addUpdateBookForm").submit();
     });
 
-
-    $('.js-modifyBookBoardButton').click(function () {
-        const bookId = $(this).attr('data-bookid');
-        const modal = $('#modifyBookBoardsModal');
-        $('#modalBookId').val(bookId);
-
-        const eventId = $('#eventId').val();
-        $.ajax({
-            url: "/admin/ajax/board/" + eventId + "/" + bookId
-        }).done(function (result) {
-            modal.modal('show');
-
-            result.forEach(v => {
-                const boardNo = modal.find('#boardNo-' + v.sessionId);
-                if (boardNo) {
-                    boardNo.val(v.boardNo);
-                } else {
-                    console.log('Cannot find boardNo field');
-                }
-
-                const maxUsers = modal.find('#maxusers-' + v.sessionId);
-                if (maxUsers) {
-                    maxUsers.val(v.maxUsers);
-                } else {
-                    console.log('Cannot find boardNo field');
-                }
-            });
-        });
-    });
+    modifyBook();
 
     $('#saveBookBoard').click(function () {
         const form = $('#bookBoardForm');
+        console.log(form);
         form.attr('action', '/admin/sessions/modifyBook/' + $('#eventId').val() + '/' + $('#modalBookId').val());
         form.submit();
+    })
+}
+
+function cleanModalOnHide() {
+    $('#modifyBookBoardsModal').on('hidden.bs.modal', function (e) {
+        $(this)
+            .find("input,textarea,select")
+            .val('')
+            .end()
+            .find("input[type=checkbox], input[type=radio]")
+            .prop("checked", "")
+            .end();
     })
 }
 

@@ -3,17 +3,14 @@ package com.byka.humanlibrary.controller;
 import com.byka.humanlibrary.converter.ModifyBookFormBuilder;
 import com.byka.humanlibrary.data.*;
 import com.byka.humanlibrary.exceptions.ValidationException;
-import com.byka.humanlibrary.service.BoardService;
 import com.byka.humanlibrary.service.BookService;
+import com.byka.humanlibrary.service.BookToSessionService;
 import com.byka.humanlibrary.service.EventService;
 import com.byka.humanlibrary.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -30,11 +27,17 @@ public class SessionPageController {
     private BookService bookService;
 
     @Autowired
-    private BoardService boardService;
+    private BookToSessionService bookToSessionService;
 
     @PostMapping("/addBook/{eventId}")
     public String addBook(@PathVariable Long eventId, Model model, SessionBookForm bookForm) {
         eventService.addToCatalog(eventId, bookForm.getBookId());
+        return "redirect:/admin/sessions/" + eventId.toString();
+    }
+
+    @PostMapping("/removeBook/{eventId}")
+    public String removeBook(@PathVariable Long eventId, @RequestParam("bookId") Long bookId) {
+        eventService.removeFromCatalog(eventId, bookId);
         return "redirect:/admin/sessions/" + eventId.toString();
     }
 
@@ -68,12 +71,12 @@ public class SessionPageController {
 
     @PostMapping("/modifyBook/{eventId}/{bookId}")
     public String updateBookSessions(@PathVariable("eventId") Long eventId, @PathVariable("bookId") Long bookId, ModifyBookForm modifyBookForm) {
-        List<BoardData> newBoardDataList = ModifyBookFormBuilder.buildBoardData(modifyBookForm, bookId);
-        boardService.updateBoardDataForBook(eventId, bookId, newBoardDataList);
+        List<BookToSessionData> newBoardDataList = ModifyBookFormBuilder.buildBoardData(modifyBookForm, bookId);
+        bookToSessionService.updateBookForEvent(eventId, bookId, newBoardDataList);
         return "redirect:/admin/sessions/" + eventId.toString();
     }
 
-    private SessionTable buildSessionTable(@PathVariable Long eventId, List<SessionData> sessionDataList) {
+    private SessionTable buildSessionTable(Long eventId, List<SessionData> sessionDataList) {
         SessionTable sessionTable = new SessionTable();
         List<SessionRow> rows = buildRows(sessionDataList);
         enrichWithUnusedBooks(eventId, rows, sessionDataList.size());
@@ -91,7 +94,7 @@ public class SessionPageController {
         bookPairs.forEach(name -> {
             SessionRow row = new SessionRow();
             row.setBookInfo(name);
-            row.setRows(new BoardData[sessionSize]);
+            row.setRows(new BookToSessionData[sessionSize]);
             rows.add(row);
         });
     }
@@ -110,15 +113,15 @@ public class SessionPageController {
     }
 
     private List<SessionRow> buildRows(List<SessionData> sessionDataList) {
-        Map<Long, BoardData[]> table = new HashMap<>();
+        Map<Long, BookToSessionData[]> table = new HashMap<>();
         for (int i = 0; i < sessionDataList.size(); i++) {
             SessionData sessionData = sessionDataList.get(i);
             int finalI = i;
-            sessionData.getBoards().forEach(board -> {
+            sessionData.getBooksToSession().forEach(board -> {
                 Long bookId = board.getBookId();
-                BoardData[] boards = table.get(bookId);
+                BookToSessionData[] boards = table.get(bookId);
                 if (boards == null) {
-                    boards = new BoardData[sessionDataList.size()];
+                    boards = new BookToSessionData[sessionDataList.size()];
                 }
                 boards[finalI] = board;
                 table.put(bookId, boards);
@@ -137,8 +140,8 @@ public class SessionPageController {
         return rows;
     }
 
-    private NameIdPair findBookInfo(BoardData[] boards) {
-        for (BoardData boardData : boards) {
+    private NameIdPair findBookInfo(BookToSessionData[] boards) {
+        for (BookToSessionData boardData : boards) {
             if (boardData != null) {
                 return new NameIdPair(boardData.getBookName(), boardData.getBookId());
             }

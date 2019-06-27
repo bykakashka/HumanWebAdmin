@@ -4,7 +4,7 @@ public class SessionHeader {
     private String startDate;
     private String endDate;
     private Integer sequence;
-    private Long SessionId;
+    private Long sessionId;
 
     public SessionHeader() {
         super();
@@ -35,10 +35,10 @@ public class SessionHeader {
     }
 
     public Long getSessionId() {
-        return SessionId;
+        return sessionId;
     }
 
     public void setSessionId(Long sessionId) {
-        SessionId = sessionId;
+        this.sessionId = sessionId;
     }
 }

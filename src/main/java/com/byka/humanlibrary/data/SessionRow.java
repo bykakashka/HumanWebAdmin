@@ -1,14 +1,14 @@
 package com.byka.humanlibrary.data;
 
 public class SessionRow {
-    private BoardData[] rows;
+    private BookToSessionData[] rows;
     private NameIdPair bookInfo;
 
-    public BoardData[] getRows() {
+    public BookToSessionData[] getRows() {
         return rows;
     }
 
-    public void setRows(BoardData[] rows) {
+    public void setRows(BookToSessionData[] rows) {
         this.rows = rows;
     }
 
