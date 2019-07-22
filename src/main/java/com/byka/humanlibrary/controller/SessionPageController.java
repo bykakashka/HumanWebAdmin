@@ -69,6 +69,18 @@ public class SessionPageController {
         return "sessions";
     }
 
+    @GetMapping("/openRegistration/{eventId}/{sessionId}")
+    public String openRegistration(@PathVariable Long sessionId, @PathVariable Long eventId) {
+        sessionService.startRegistration(sessionId);
+        return "redirect:/admin/sessions/" + eventId;
+    }
+
+    @GetMapping("/closeRegistration/{eventId}/{sessionId}")
+    public String closeRegistration(@PathVariable Long sessionId, @PathVariable Long eventId) {
+        sessionService.closeRegistration(sessionId);
+        return "redirect:/admin/sessions/" + eventId;
+    }
+
     @PostMapping("/modifyBook/{eventId}/{bookId}")
     public String updateBookSessions(@PathVariable("eventId") Long eventId, @PathVariable("bookId") Long bookId, ModifyBookForm modifyBookForm) {
         List<BookToSessionData> newBoardDataList = ModifyBookFormBuilder.buildBoardData(modifyBookForm, bookId);
@@ -107,6 +119,7 @@ public class SessionPageController {
             header.setEndDate(sessionData.getEndDate());
             header.setSequence(sessionData.getSequence());
             header.setSessionId(sessionData.getId());
+            header.setRegistrationAvailable(Boolean.TRUE.equals(sessionData.getRegistrationAvailable()));
             headers.add(header);
         });
         return headers;

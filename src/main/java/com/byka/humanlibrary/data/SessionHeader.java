@@ -5,6 +5,7 @@ public class SessionHeader {
     private String endDate;
     private Integer sequence;
     private Long sessionId;
+    private boolean registrationAvailable;
 
     public SessionHeader() {
         super();
@@ -40,5 +41,13 @@ public class SessionHeader {
 
     public void setSessionId(Long sessionId) {
         this.sessionId = sessionId;
+    }
+
+    public boolean isRegistrationAvailable() {
+        return registrationAvailable;
+    }
+
+    public void setRegistrationAvailable(boolean registrationAvailable) {
+        this.registrationAvailable = registrationAvailable;
     }
 }

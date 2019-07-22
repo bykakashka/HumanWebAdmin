@@ -28,7 +28,15 @@
                     <c:forEach var="h" items="${map.header}">
                         <td>
                                 ${h.sequence}<br/>
-                                ${h.startDate} - ${h.endDate}
+                                ${h.startDate} - ${h.endDate} <br/>
+                            <c:choose>
+                                <c:when test="${h.registrationAvailable}">
+                                    <a href="/admin/sessions/closeRegistration/${event.id}/${h.sessionId}"><button><spring:message code="session.closeRegistration"/> </button></a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="/admin/sessions/openRegistration/${event.id}/${h.sessionId}"><button><spring:message code="session.openRegistration"/> </button></a>
+                                </c:otherwise>
+                            </c:choose>
                         </td>
                     </c:forEach>
                     <td></td>
@@ -62,7 +70,8 @@
                                 <input type="hidden" value="${bookRow.bookInfo.id}" name="bookId">
 
                                 <button type="submit" class="btn btn-danger btn-sm  right-button">
-                                    <span class="glyphicon glyphicon-minus"></span> <spring:message code="event.removeBook"/>
+                                    <span class="glyphicon glyphicon-minus"></span> <spring:message
+                                        code="event.removeBook"/>
                                 </button>
                             </form>
 
